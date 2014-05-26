@@ -265,10 +265,19 @@ Swagger.prototype.filterApiListing = function(req, res, r) {
       self.addPropertiesToRequiredModels(model.properties, requiredModels);
     }
   });
+	// hack in from k.r.
+	if (requiredModels[0]=='Order'){
+	   requiredModels.push('PaymentData', 'BillingAddress', 'ShippingAddress', 'SoldItem','ShopProductDetails','BaseProductData', 'ChildProduct','SoldItemAttribute','ShippingInfo');
+	}
+	// end hack 
   _.forOwn(requiredModels, function (modelName) {
     if (!output[modelName]) {
       var model = self.allModels[modelName];
       if (model) {
+	    if (model.id==null){
+			delete model['id'];
+			delete model.properties['id'];
+		}
         output.models[modelName] = model;
       }
     }
