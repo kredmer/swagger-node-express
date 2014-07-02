@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-exports.query = exports.q = function(name, description, type, required, allowableValuesEnum, defaultValue) {
+exports.query = exports.q = function(name, description, type, required, allowableValuesEnum, defaultValue, allowMultiple) {
   return {
     "name" : name,
     "description" : description,
@@ -22,6 +22,7 @@ exports.query = exports.q = function(name, description, type, required, allowabl
     "required" : required,
     "enum" : allowableValuesEnum,
     "defaultValue" : defaultValue,
+    "allowMultiple" : (typeof allowMultiple==="boolean" ? allowMultiple : false),
     "paramType" : "query"
   };
 };
